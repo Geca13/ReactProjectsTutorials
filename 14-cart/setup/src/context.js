@@ -18,11 +18,26 @@ const AppProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({type: 'CLEAR_CART'})
   }
+  const removeItem = (id) => {
+    dispatch({type: 'REMOVE_ITEM',payload: id})
+  }
+  const increaseQty = (id) => {
+    dispatch({type: 'INCREASE_QTY' , payload: id})
+  }
+  const decreaseQty = (id) => {
+    dispatch({type: 'DECREASE_QTY' , payload: id})
+  }
+  useEffect(()=>{
+    dispatch({type: 'GET_TOTALS'})
+  },[state.cart])
   return (
     <AppContext.Provider
       value={{
         ...state,
         clearCart,
+        removeItem,
+        increaseQty,
+        decreaseQty,
       }}
     >
       {children}
